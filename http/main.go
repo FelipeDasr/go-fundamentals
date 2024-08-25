@@ -1,28 +1,13 @@
 package main
 
 import (
-	"encoding/json"
+	"http-server/controllers"
 	"log"
 	"net/http"
 )
 
 func main() {
-
-	http.HandleFunc("/home", func(res http.ResponseWriter, req *http.Request) {
-		type HomeResponse struct {
-			Message string `json:"message"`
-			Code int `json:"code"`
-		}
-
-		responseJSON, err := json.Marshal(HomeResponse{"Hello my friend", 200})
-		if err != nil {
-			log.Fatal(err)
-			res.Write([]byte("Error"))
-		}
-
-		res.Header().Set("Content-Type", "application/json")
-		res.Write(responseJSON)
-	})
+	http.HandleFunc("/home", controllers.HomeController)
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
