@@ -7,7 +7,8 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/home", controllers.HomeController)
+	http.HandleFunc("/api/home", controllers.HomeController)
+	http.HandleFunc("/home", controllers.PageRenderController)
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
